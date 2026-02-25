@@ -144,7 +144,7 @@ curl -X POST http://<ip>:8000/edit \
 - **Format:** PNG
 - **Max Resolution:** 2 megapixels
 - **Storage:** S3 with presigned URLs (1-hour expiry)
-- **Generation Time:** ~12-30 seconds
+- **Generation Time:** ~8-10 seconds (warm), ~5 minutes on cold start (first request after boot loads ~18GB into VRAM)
 
 ## Client Example (Python)
 
