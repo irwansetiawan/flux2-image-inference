@@ -55,7 +55,7 @@ def _build_txt2img_workflow(
             "class_type": "CLIPLoader",
             "inputs": {
                 "clip_name": TEXT_ENCODER_MODEL,
-                "type": "flux",
+                "type": "flux2",
             },
         },
         "3": {
@@ -89,6 +89,7 @@ def _build_txt2img_workflow(
             "inputs": {
                 "width": width,
                 "height": height,
+                "batch_size": 1,
             },
         },
         "8": {
@@ -147,7 +148,7 @@ def _build_edit_workflow(
             "class_type": "CLIPLoader",
             "inputs": {
                 "clip_name": TEXT_ENCODER_MODEL,
-                "type": "flux",
+                "type": "flux2",
             },
         },
         "3": {
@@ -208,6 +209,7 @@ def _build_edit_workflow(
             "inputs": {
                 "width": ["8", 0],
                 "height": ["8", 1],
+                "batch_size": 1,
             },
         },
         "12": {
