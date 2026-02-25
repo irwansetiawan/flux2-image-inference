@@ -11,12 +11,13 @@ from src.config import (
 
 
 def get_s3_client():
-    """Get an S3 client."""
+    """Get an S3 client with regional endpoint."""
     return boto3.client(
         "s3",
         aws_access_key_id=AWS_ACCESS_KEY_ID,
         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
         region_name=S3_REGION,
+        endpoint_url=f"https://s3.{S3_REGION}.amazonaws.com",
     )
 
 
