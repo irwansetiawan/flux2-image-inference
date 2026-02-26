@@ -21,6 +21,14 @@ from src.config import (
 from src.inference import generate_image, edit_image, cleanup_files, InferenceError
 from src.storage import upload_image, get_presigned_url, download_image
 
+LAST_REQUEST_FILE = Path("/tmp/flux2-last-request")
+
+
+def _touch_activity():
+    """Update last-request timestamp for idle shutdown monitor."""
+    LAST_REQUEST_FILE.touch()
+
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -89,6 +97,8 @@ async def health():
 @app.post("/generate", response_model=ImageResponse, dependencies=[Depends(verify_api_key)])
 def generate(request: GenerateRequest):
     """Generate an image from a text prompt (synchronous)."""
+    _touch_activity()
+
     if not request.prompt:
         raise HTTPException(status_code=400, detail="Prompt is required")
 
@@ -136,6 +146,8 @@ def generate(request: GenerateRequest):
 @app.post("/edit", response_model=ImageResponse, dependencies=[Depends(verify_api_key)])
 def edit(request: EditRequest):
     """Edit an image using a text prompt and reference image (synchronous)."""
+    _touch_activity()
+
     if not request.prompt:
         raise HTTPException(status_code=400, detail="Prompt is required")
 

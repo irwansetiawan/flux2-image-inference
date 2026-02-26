@@ -3,6 +3,9 @@ set -e
 
 echo "Starting Flux2 services..."
 
+# Touch activity file so idle monitor starts counting from boot time
+touch /tmp/flux2-last-request
+
 # Start ComfyUI backend first
 sudo systemctl start comfyui
 echo "ComfyUI started (port 8188)"

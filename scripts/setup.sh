@@ -161,6 +161,12 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable comfyui flux2-api
 
+# =============================================
+# Idle Monitor Cron Job
+# =============================================
+echo "Installing idle monitor cron (every 5 minutes)..."
+(crontab -l 2>/dev/null | grep -v idle-monitor; echo "*/5 * * * * /home/ubuntu/flux2/scripts/idle-monitor.sh") | crontab -
+
 echo ""
 echo "=== Setup Complete ==="
 echo ""
