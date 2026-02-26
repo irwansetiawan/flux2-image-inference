@@ -16,6 +16,6 @@ IDLE_THRESHOLD=$(( IDLE_MINUTES * 60 ))
 
 if [ "$FILE_AGE" -gt "$IDLE_THRESHOLD" ]; then
     logger -t flux2-idle "Instance idle for ${IDLE_MINUTES}+ minutes. Shutting down."
-    curl -s -X POST https://n8n.irwansetiawan.com/webhook-test/ba4845ed-9870-4d0c-b9ad-acd24d31b021 --max-time 10 || true
+    curl -s -X POST https://n8n.irwansetiawan.com/webhook/ba4845ed-9870-4d0c-b9ad-acd24d31b021 --max-time 10 || true
     sudo shutdown -h now
 fi
